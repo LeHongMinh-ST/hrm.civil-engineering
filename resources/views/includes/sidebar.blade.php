@@ -6,7 +6,7 @@
         <!-- Sidebar header -->
         <div class="sidebar-section">
             <div class="sidebar-section-body d-flex justify-content-center">
-                <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Hệ thông quản lý</h5>
+                <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Hệ thống quản lý</h5>
 
                 <div>
                     <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
@@ -26,12 +26,12 @@
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link active">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="ph-house"></i>
                         <span>Bảng điều khiển</span>
                     </a>
                 </li>
-                <!-- General -->
+                <!-- Chung -->
                 <li class="nav-item-header pt-0">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Quản lý chung</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
@@ -40,19 +40,19 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="ph-calendar-check"></i>
-                        <span>Chấm công thợ</span>
+                        <span>Bảng công thợ</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('workers.index') }}" class="nav-link {{ request()->is('workers*') ? 'active' : '' }}">
                         <i class="ph-users"></i>
                         <span>Quản lý thợ</span>
                     </a>
                 </li>
 
 
-                <!-- General -->
+                <!-- Lương Thưởng -->
                 <li class="nav-item-header pt-0">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Lương thưởng</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
@@ -61,7 +61,26 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="ph-currency-circle-dollar"></i>
-                        <span>Quản lý lương</span>
+                        <span>Bảng lương</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="ph-coins"></i>
+                        <span>Ứng lương</span>
+                    </a>
+                </li>
+
+                <!-- Hệ thống -->
+                <li class="nav-item-header pt-0">
+                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Hệ thống</div>
+                    <i class="ph-dots-three sidebar-resize-show"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
+                        <i class="ph-user"></i>
+                        <span>Người dùng</span>
                     </a>
                 </li>
             </ul>

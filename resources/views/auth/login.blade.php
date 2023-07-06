@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 @include('includes.head')
+
+@vite(['resources/js/auth/login/index.js'])
+
 <body>
 
 <!-- Main navbar -->
@@ -30,7 +33,8 @@
             <div class="content d-flex justify-content-center align-items-center">
 
                 <!-- Login form -->
-                <form class="login-form" action="https://demo.interface.club/limitless/demo/template/html/layout_1/full/index.html">
+                <form class="login-form" action="{{ route('postLogin') }}" method="Post">
+                    @csrf
                     <div class="card mb-0">
                         <div class="card-body">
                             <div class="text-center mb-3">
@@ -42,23 +46,32 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Tài khoản/Email</label>
+                                <label class="form-label" for="username">Tài khoản/Email</label>
                                 <div class="form-control-feedback form-control-feedback-start">
-                                    <input type="text" class="form-control" placeholder="john@doe.com">
+                                    <input type="text" class="form-control" id="username" value="{{ old('username') }}"
+                                           name="username" placeholder="john@doe.com">
                                     <div class="form-control-feedback-icon">
                                         <i class="ph-user-circle text-muted"></i>
                                     </div>
                                 </div>
+                                @error('username')
+                                <label id="error-username" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Mật khẩu</label>
+                                <label class="form-label" for="password">Mật khẩu</label>
                                 <div class="form-control-feedback form-control-feedback-start">
-                                    <input type="password" class="form-control" placeholder="•••••••••••">
+                                    <input type="password" id="password" value="{{ old('password') }}"
+                                           name="password" class="form-control" placeholder="•••••••••••">
                                     <div class="form-control-feedback-icon">
                                         <i class="ph-lock text-muted"></i>
                                     </div>
+
                                 </div>
+                                @error('password')
+                                <label id="error-password" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                @enderror
                             </div>
 
                             <div class="mb-3">

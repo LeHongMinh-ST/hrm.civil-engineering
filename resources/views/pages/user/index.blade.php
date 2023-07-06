@@ -5,12 +5,8 @@
         <div class="page-header-content d-lg-flex">
             <div class="d-flex">
                 <h4 class="page-title mb-0">
-                    Bảng điều khiển
+                    Danh sách người dùng
                 </h4>
-
-                <a href="#page_header" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
-                    <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
-                </a>
             </div>
 
         </div>
@@ -19,12 +15,8 @@
             <div class="d-flex">
                 <div class="breadcrumb py-2">
                     <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ph-house"></i></a>
-                    <span class="breadcrumb-item active">Bảng điều khiển </span>
+                    <span class="breadcrumb-item active">Người dùng </span>
                 </div>
-
-                <a href="#breadcrumb_elements" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
-                    <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
-                </a>
             </div>
 
         </div>
@@ -43,8 +35,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <H2>Xin chào, {{ auth()->user()->name }}</H2>
-                        <p>Chúc bạn có một ngày làm việc hiệu quả!</p>
+                        {{ $title }}
                     </div>
                 </div>
             </div>
@@ -53,3 +44,5 @@
 
     </div>
 @endsection
+
+
