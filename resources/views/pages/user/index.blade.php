@@ -45,4 +45,7 @@
     </div>
 @endsection
 
+@section('script_custom')
+
+@endsection
 
