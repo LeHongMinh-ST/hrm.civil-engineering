@@ -35,7 +35,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        {{ $title }}
+                        Danh sách người dùng
                     </div>
                 </div>
             </div>
@@ -45,4 +45,7 @@
     </div>
 @endsection
 
+@section('script_custom')
+
+@endsection
 
