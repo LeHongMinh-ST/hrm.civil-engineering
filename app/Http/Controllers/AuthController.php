@@ -23,6 +23,13 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+
+    /**
+     * Handle the login request and redirect to the home page
+     *
+     * @param AuthLoginRequest $request
+     * @return RedirectResponse
+     */
     public function login(AuthLoginRequest $request): RedirectResponse
     {
         $request->merge([$this->username() => request()->input('username')]);
@@ -39,9 +46,26 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * Get type of username
+     *
+     * @return string
+     */
     private function username(): string
     {
         return filter_var(request()->input('username'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    }
+
+
+    /**
+     * Handle logout auth and redirect login form
+     *
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
+    {
+        auth()->logout();
+        return redirect()->route('login');
     }
 
 }

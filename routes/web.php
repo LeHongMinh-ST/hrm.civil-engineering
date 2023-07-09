@@ -25,6 +25,8 @@ Route::middleware('preventBackHistory')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::prefix('users')->name('users.')->group(function () {

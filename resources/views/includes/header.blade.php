@@ -33,10 +33,13 @@
                     </a>
                     <div class="dropdown-divider"></div>
 
-                    <a href="#" class="dropdown-item">
-                        <i class="ph-sign-out me-2"></i>
-                        Đăng xuất
-                    </a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item">
+                            <i class="ph-sign-out me-2"></i>
+                            Đăng xuất
+                        </button>
+                    </form>
                 </div>
             </li>
         </ul>
