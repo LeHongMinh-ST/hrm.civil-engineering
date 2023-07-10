@@ -23,11 +23,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Application|View|Factory
      */
-    public function index(): Factory|View|Application
+    public function index(Request $request): Factory|View|Application
     {
-        $users = User::paginate(10);
+        $search = $request->get('q', '');
+        $users = User::query()->when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%$search%")
+                ->orWhere('username', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%");
+        })->paginate(config('constants.limit_paginate'));
         return view('pages.user.index')->with('users', $users);
     }
 

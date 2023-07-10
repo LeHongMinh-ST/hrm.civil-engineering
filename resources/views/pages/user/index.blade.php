@@ -39,15 +39,18 @@
                             <div class="content-filter w-50">
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="user-search-input">Tìm kiếm</label>
-                                            <div class="form-control-feedback form-control-feedback-end">
-                                                <input type="text" placeholder="Nhập từ khoá để tìm kiếm..." class="form-control" id="user-search-input">
-                                                <div class="form-control-feedback-icon">
-                                                    <i class="ph-magnifying-glass"></i>
+                                        <form action="" method="get" id="form-search">
+                                            <div class="form-group">
+                                                <label for="user-search-input">Tìm kiếm</label>
+                                                <div class="form-control-feedback form-control-feedback-end">
+                                                    <input type="text" name="q" value="{{ request()->query('q') }}" placeholder="Nhập từ khoá để tìm kiếm..." class="form-control" id="user-search-input">
+                                                    <div class="form-control-feedback-icon">
+                                                        <i class="ph-magnifying-glass"></i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
+
 
                                     </div>
                                 </div>
@@ -106,15 +109,22 @@
                                             <td colspan="6">
                                                 <div class="empty-table text-center">
                                                     <div class="image-empty">
-                                                        <img src="" alt="">
+                                                        <img src="{{ asset(config('constants.empty_image')) }}" width="300px" alt="">
                                                     </div>
-                                                    <div class="text-empty">Không có bản ghi</div>
+                                                    <div class="text-empty">Không có bản ghi!</div>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="d-flex justify-content-center align-items-center w-100 mt-3">
+
+                                <div class="pagination">
+                                    {{ $users->appends(request()->input())->links() }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -126,6 +136,6 @@
 @endsection
 
 @section('script_custom')
-
+    @vite(['resources/js/user/index.js'])
 @endsection
 
