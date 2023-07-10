@@ -80,7 +80,7 @@
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
                         <i class="ph-user"></i>
-                        <span>Người dùng</span>
+                        <span>Tài khoản</span>
                     </a>
                 </li>
             </ul>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\User\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,5 +50,14 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+
+    public function getRoleTextAttribute()
+    {
+        return match ($this->role) {
+            UserRole::Admin => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-warning">' . UserRole::getDescription($this->role) . '</span>',
+            default => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-primary">' . UserRole::getDescription($this->role) . '</span>',
+        };
     }
 }

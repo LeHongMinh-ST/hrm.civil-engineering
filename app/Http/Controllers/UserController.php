@@ -27,7 +27,8 @@ class UserController extends Controller
      */
     public function index(): Factory|View|Application
     {
-        return view('pages.user.index');
+        $users = User::paginate(10);
+        return view('pages.user.index')->with('users', $users);
     }
 
     /**
@@ -58,7 +59,7 @@ class UserController extends Controller
 
             $user->save();
 
-            $request->session()->flash('success', 'Tạo mới người dùng thành công');
+            $request->session()->flash('success', 'Tạo mới tài khoản thành công');
 
             return redirect()->route('users.index');
 
@@ -69,7 +70,7 @@ class UserController extends Controller
             ]);
 
             return redirect()->back()
-                ->withErrors(['error' => ['Không thể tạo mới người dùng']])
+                ->withErrors(['error' => ['Không thể tạo mới tài khoản']])
                 ->withInput();
         }
 
@@ -126,7 +127,7 @@ class UserController extends Controller
 
             $user->save();
 
-            $request->session()->flash('success', 'Cập nhật người dùng thành công');
+            $request->session()->flash('success', 'Cập nhật tài khoản thành công');
 
             return redirect()->route('users.index');
         } catch (ModelNotFoundException $e) {
@@ -144,7 +145,7 @@ class UserController extends Controller
             ]);
 
             return redirect()->back()
-                ->withErrors(['error' => ['Không thể cập nhật người dùng']])
+                ->withErrors(['error' => ['Không thể cập nhật tài khoản']])
                 ->withInput();
         }
     }
@@ -171,7 +172,7 @@ class UserController extends Controller
 
             User::destroy($id);
 
-            session()->flash('success', 'Xóa người dùng thành công');
+            session()->flash('success', 'Xóa tài khoản thành công');
 
             return redirect()->route('users.index');
 
@@ -190,7 +191,7 @@ class UserController extends Controller
             ]);
 
             return redirect()->back()
-                ->withErrors(['error' => ['Không thể xóa người dùng']])
+                ->withErrors(['error' => ['Không thể xóa tài khoản']])
                 ->withInput();
         }
     }

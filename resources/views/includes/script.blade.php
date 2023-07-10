@@ -17,11 +17,11 @@
         @endif
 
         @if(\session()->has('error'))
-        init.showNotySuccess('{{ \session()->pull('error') }}')
+        init.showNotyError('{{ \session()->pull('error') }}')
         @endif
 
         @error('error')
-        init.showNotySuccess('{{ $message }}')
+        init.showNotyError('{{ $message }}')
         @enderror
     })
 </script>

@@ -5,9 +5,14 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/js/auth/login/index.js'
+                'resources/js/auth/login/index.js',
+                'resources/js/user/create.js'
             ],
-            refresh: true,
+            refresh: [
+                'resources/routes/**',
+                'routes/**',
+                'resources/views/**',
+            ],
         }),
     ],
 });
