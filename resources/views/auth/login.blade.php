@@ -74,12 +74,17 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                            <div class="d-flex align-items-center mb-3">
+                                <label class="form-check">
+                                    <input type="checkbox" name="remember" class="form-check-input">
+                                    <span class="form-check-label">Lưu đăng nhập</span>
+                                </label>
+
+                                <a href="login_password_recover.html" class="ms-auto">Quên mật khẩu?</a>
                             </div>
 
-                            <div class="text-center">
-                                <a href="login_password_recover.html">Quên mật khẩu?</a>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                             </div>
                         </div>
                     </div>

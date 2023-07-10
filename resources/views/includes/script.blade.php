@@ -13,15 +13,15 @@
 <script>
     $(document).ready(() => {
         @if(\session()->has('success'))
-        init.showNotiSuccess('{{ \session()->pull('success') }}')
+        init.showNotySuccess('{{ \session()->pull('success') }}')
         @endif
 
         @if(\session()->has('error'))
-        init.showNotiSuccess('{{ \session()->pull('error') }}')
+        init.showNotySuccess('{{ \session()->pull('error') }}')
         @endif
 
         @error('error')
-        init.showNotiSuccess('{{ $message }}')
+        init.showNotySuccess('{{ $message }}')
         @enderror
     })
 </script>

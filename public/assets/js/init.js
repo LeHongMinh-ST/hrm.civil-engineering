@@ -9,7 +9,7 @@ $(document).ready(function () {
 })
 
 const init = {
-    showNotiSuccess: (message) => {
+    showNotySuccess: (message) => {
         new Noty({
             text: message,
             type: 'success',
@@ -17,7 +17,7 @@ const init = {
         }).show();
     },
 
-    showNotiError: (message) => {
+    showNotyError: (message) => {
         new Noty({
             text: message,
             type: 'error',
