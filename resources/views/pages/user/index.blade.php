@@ -33,7 +33,7 @@
                         <div class="content-header d-flex justify-content-between align-items-end">
                             <div class="content-filter w-50">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-md-8">
                                         <form action="" method="get" id="form-search">
                                             <div class="form-group">
                                                 <label for="user-search-input">Tìm kiếm</label>
@@ -63,7 +63,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="content-table">
-                            <table class="table-bordered table">
+                            <table class="table-bordered table table-responsive">
                                 <thead>
                                 <tr>
                                     <th class="text-center" width="4%">STT</th>
