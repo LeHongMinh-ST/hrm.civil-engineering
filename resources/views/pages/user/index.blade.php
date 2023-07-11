@@ -25,12 +25,7 @@
 
 @section('page-content')
     <div class="content">
-
-        <!-- Main charts -->
-        <!-- /main charts -->
-
-
-        <!-- Dashboard content -->
+        <!-- Content -->
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -82,7 +77,7 @@
                                 <tbody>
                                 @forelse($users as $user)
                                     <tr>
-                                        <td style="text-align: center">{{ getIndexTable($loop->index, $users) }}</td>
+                                        <td class="text-center">{{ getIndexTable($loop->index, $users) }}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->username}}</td>
                                         <td>{{$user->email}}</td>
@@ -102,10 +97,15 @@
                                                     </a>
                                                     @if ($user->id !== auth()->id())
                                                         <div class="dropdown-divider"></div>
-                                                        <a href="#" class="dropdown-item text-danger">
-                                                            <i class="ph-trash me-2"></i>
-                                                            Xoá
-                                                        </a>
+                                                        <form action="{{ route('users.destroy', ['id' => $user->id]) }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="button" class="btn-delete dropdown-item text-danger">
+                                                                <i class="ph-trash me-2"></i>
+                                                                Xoá
+                                                            </button>
+                                                        </form>
+
                                                     @endif
                                                 </div>
                                             </div>
@@ -138,7 +138,7 @@
                 </div>
             </div>
         </div>
-        <!-- /dashboard content -->
+        <!-- /content -->
 
     </div>
 @endsection

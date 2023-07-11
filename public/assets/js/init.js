@@ -6,7 +6,19 @@ $(document).ready(function () {
         timeout: 2500
     });
 
+
+
 })
+
+const swalInit = swal.mixin({
+    buttonsStyling: false,
+    customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-light',
+        denyButton: 'btn btn-light',
+        input: 'form-control'
+    }
+});
 
 const init = {
     showNotySuccess: (message) => {
@@ -25,3 +37,5 @@ const init = {
         }).show();
     }
 }
+
+

@@ -5,6 +5,7 @@
 {{--<!-- Theme JS files -->--}}
 <script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/noty/noty.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/notifications/sweet_alert.min.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
 <script src="{{ asset('assets/js/init.js') }}"></script>
 {{--<!-- /theme JS files -->--}}
