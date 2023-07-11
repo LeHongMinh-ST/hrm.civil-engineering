@@ -84,8 +84,8 @@
                         <div class="title bold"><i class="ph-gear"></i> Tác vụ</div>
                     </div>
                     <div class="card-body">
-                        <button class="btn btn-teal mr-2" id="btn-submit"><i class="ph-paper-plane-tilt"></i> Tạo mới</button>
-                        <a href="{{ route('users.index') }}" class="btn btn-warning mr-2"><i class="ph-arrow-u-up-left"></i> Quay lại</a>
+                        <button class="btn btn-teal mr-2" id="btn-submit"><i class="ph-paper-plane-tilt me-1"></i> Tạo mới</button>
+                        <a href="{{ route('users.index') }}" class="btn btn-warning mr-2"><i class="ph-arrow-u-up-left me-1"></i> Quay lại</a>
                     </div>
                 </div>
             </div>

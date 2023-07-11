@@ -76,8 +76,8 @@
 
                             <div class="d-flex align-items-center mb-3">
                                 <label class="form-check">
-                                    <input type="checkbox" name="remember" class="form-check-input">
-                                    <span class="form-check-label">Lưu đăng nhập</span>
+                                    <input type="checkbox" name="remember" class="form-check-input cursor-pointer">
+                                    <span class="form-check-label cursor-pointer">Lưu đăng nhập</span>
                                 </label>
 
                                 <a href="login_password_recover.html" class="ms-auto">Quên mật khẩu?</a>

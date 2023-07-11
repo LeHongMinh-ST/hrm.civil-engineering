@@ -43,7 +43,9 @@
                                             <div class="form-group">
                                                 <label for="user-search-input">Tìm kiếm</label>
                                                 <div class="form-control-feedback form-control-feedback-end">
-                                                    <input type="text" name="q" value="{{ request()->query('q') }}" placeholder="Nhập từ khoá để tìm kiếm..." class="form-control" id="user-search-input">
+                                                    <input type="text" name="q" value="{{ request()->query('q') }}"
+                                                           placeholder="Nhập từ khoá để tìm kiếm..."
+                                                           class="form-control" id="user-search-input">
                                                     <div class="form-control-feedback-icon">
                                                         <i class="ph-magnifying-glass"></i>
                                                     </div>
@@ -57,7 +59,8 @@
 
                             </div>
                             <div class="content-action">
-                                <a href="{{route('users.create')}}" class="btn btn-teal"><i class="ph-plus-circle"></i> Tạo mới</a>
+                                <a href="{{route('users.create')}}" class="btn btn-teal"><i
+                                        class="ph-plus-circle me-1"></i> Tạo mới</a>
                             </div>
                         </div>
                     </div>
@@ -77,45 +80,50 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($users as $user)
-                                        <tr>
-                                            <td style="text-align: center">{{ $loop->index + 1 + $users->perPage() * ($users->currentPage() - 1)   }}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->username}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td class="text-center">{!! $user->roleText !!}</td>
-                                            <td class="text-center">
-                                                <div class="dropdown text-center">
-                                                    <a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="ph-list me-2"></i>
-                                                    </a>
+                                @forelse($users as $user)
+                                    <tr>
+                                        <td style="text-align: center">{{ getIndexTable($loop->index, $users) }}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->username}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td class="text-center">{!! $user->roleText !!}</td>
+                                        <td class="text-center">
+                                            <div class="dropdown text-center">
+                                                <a href="#" class="text-body" data-bs-toggle="dropdown"
+                                                   aria-expanded="false">
+                                                    <i class="ph-list me-2"></i>
+                                                </a>
 
-                                                    <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto" style="">
-                                                        <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="dropdown-item">
-                                                            <i class="ph-pencil-simple-line me-2"></i>
-                                                            Chỉnh sửa
-                                                        </a>
+                                                <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto" style="">
+                                                    <a href="{{ route('users.edit', ['id' => $user->id]) }}"
+                                                       class="dropdown-item">
+                                                        <i class="ph-pencil-simple-line me-2"></i>
+                                                        Chỉnh sửa
+                                                    </a>
+                                                    @if ($user->id !== auth()->id())
                                                         <div class="dropdown-divider"></div>
                                                         <a href="#" class="dropdown-item text-danger">
                                                             <i class="ph-trash me-2"></i>
                                                             Xoá
                                                         </a>
-                                                    </div>
+                                                    @endif
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6">
-                                                <div class="empty-table text-center">
-                                                    <div class="image-empty">
-                                                        <img src="{{ asset(config('constants.empty_image')) }}" width="300px" alt="">
-                                                    </div>
-                                                    <div class="text-empty">Không có bản ghi!</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6">
+                                            <div class="empty-table text-center">
+                                                <div class="image-empty">
+                                                    <img src="{{ asset(config('constants.empty_image')) }}"
+                                                         width="300px" alt="">
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    @endforelse
+                                                <div class="text-empty">Không có bản ghi!</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
 
