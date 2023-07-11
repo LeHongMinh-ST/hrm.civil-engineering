@@ -29,11 +29,14 @@ class UserController extends Controller
     public function index(Request $request): Factory|View|Application
     {
         $search = $request->get('q', '');
-        $users = User::query()->when($search, function ($query) use ($search) {
-            $query->where('name', 'like', "%$search%")
-                ->orWhere('username', 'like', "%$search%")
-                ->orWhere('email', 'like', "%$search%");
-        })->paginate(config('constants.limit_paginate'));
+
+        $users = User::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('username', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
+            })->paginate(config('constants.limit_paginate'));
+
         return view('pages.user.index')->with('users', $users);
     }
 
@@ -158,8 +161,11 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param string $id
+     * @return RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         try {
             $user = User::find($id);

@@ -5,7 +5,7 @@
         <div class="page-header-content d-lg-flex">
             <div class="d-flex">
                 <h4 class="page-title mb-0">
-                    Danh sách thợ
+                    Danh sách thợ(nhân công)
                 </h4>
             </div>
 
@@ -15,7 +15,7 @@
             <div class="d-flex">
                 <div class="breadcrumb py-2">
                     <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ph-house"></i></a>
-                    <span class="breadcrumb-item active">Quản lý thợ</span>
+                    <span class="breadcrumb-item active">Thợ</span>
                 </div>
             </div>
 
@@ -25,24 +25,127 @@
 
 @section('page-content')
     <div class="content">
-
-        <!-- Main charts -->
-        <!-- /main charts -->
-
-
-        <!-- Dashboard content -->
+        <!-- Content -->
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        Danh sách thợ
+                        <div class="content-header d-flex justify-content-between align-items-end">
+                            <div class="content-filter w-50">
+                                <div class="row">
+                                    <div class="col-12 col-md-8">
+                                        <form action="" method="get" id="form-search">
+                                            <div class="form-group">
+                                                <label for="worker-search-input">Tìm kiếm</label>
+                                                <div class="form-control-feedback form-control-feedback-end">
+                                                    <input type="text" name="q" value="{{ request()->query('q') }}"
+                                                           placeholder="Nhập từ khoá để tìm kiếm..."
+                                                           class="form-control" id="worker-search-input">
+                                                    <div class="form-control-feedback-icon">
+                                                        <i class="ph-magnifying-glass"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="content-action">
+                                <a href="{{route('workers.create')}}" class="btn btn-teal"><i
+                                        class="ph-plus-circle me-1"></i> Tạo mới</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="content-table">
+                            <table class="table-bordered table table-responsive">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" width="4%">STT</th>
+                                    <th>Họ và tên</th>
+                                    <th class="text-center">Ngày sinh</th>
+                                    <th>Số điện thoại</th>
+                                    <th>CMT/CCCD</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-center" width="10%">Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($workers as $worker)
+                                    <tr>
+                                        <td class="text-center">{{ getIndexTable($loop->index, $workers) }}</td>
+                                        <td>{{$worker->name}}</td>
+                                        <td class="text-center">{{$worker->dob}}</td>
+                                        <td>{{$worker->phone}}</td>
+                                        <td>{{$worker->citizen_identification}}</td>
+                                        <td class="text-center">{!! $worker->statusTex !!}</td>
+                                        <td class="text-center">
+                                            <div class="dropdown text-center">
+                                                <a href="#" class="text-body" data-bs-toggle="dropdown"
+                                                   aria-expanded="false">
+                                                    <i class="ph-list me-2"></i>
+                                                </a>
+
+                                                <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto" style="">
+                                                    <a href="{{ route('workers.edit', ['id' => $worker->id]) }}"
+                                                       class="dropdown-item">
+                                                        <i class="ph-pencil-simple-line me-2"></i>
+                                                        Chỉnh sửa
+                                                    </a>
+                                                    @if ($worker->id !== auth()->id())
+                                                        <div class="dropdown-divider"></div>
+                                                        <form action="{{ route('workers.destroy', ['id' => $worker->id]) }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="button" class="btn-delete dropdown-item text-danger">
+                                                                <i class="ph-trash me-2"></i>
+                                                                Xoá
+                                                            </button>
+                                                        </form>
+
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="empty-table text-center">
+                                                <div class="image-empty">
+                                                    <img src="{{ asset(config('constants.empty_image')) }}"
+                                                         width="300px" alt="">
+                                                </div>
+                                                <div class="text-empty">Không có bản ghi!</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+
+                            <div class="d-flex justify-content-center align-items-center w-100 mt-3">
+
+                                <div class="pagination">
+                                    {{ $workers->appends(request()->input())->links() }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /dashboard content -->
+        <!-- /content -->
 
     </div>
 @endsection
 
+@section('script_custom')
+    @vite(['resources/js/worker/index.js'])
+@endsection
 

@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class SalaryAdvancesType extends Enum implements LocalizedEnum
 {
-    const Payment = 'payment';
-    const Advances = 'Advances';
+    public const Payment = 'payment';
+    public const Advances = 'Advances';
 }

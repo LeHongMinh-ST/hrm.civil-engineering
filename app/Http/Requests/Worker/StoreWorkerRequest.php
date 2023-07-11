@@ -1,20 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Worker;
 
 use Illuminate\Foundation\Http\FormRequest;
-use JetBrains\PhpStorm\ArrayShape;
+use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
- * @class AuthLoginRequest
+ * @class StoreWorkerRequest
  */
-class AuthLoginRequest extends FormRequest
+class StoreWorkerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -24,13 +22,12 @@ class AuthLoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array<string, ValidationRule|array|string>
      */
-    #[ArrayShape(['username' => 'string', 'password' => 'string'])] public function rules(): array
+    public function rules(): array
     {
         return [
-            'username' => 'required',
-            'password' => 'required',
+            //
         ];
     }
 
@@ -42,8 +39,7 @@ class AuthLoginRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'username' => 'tên đăng nhập/email',
-            'password' => 'mật khẩu',
+
         ];
     }
 }

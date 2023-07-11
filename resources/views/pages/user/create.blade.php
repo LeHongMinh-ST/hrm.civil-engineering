@@ -41,23 +41,22 @@
                     <div class="card-body">
                         <form action="{{ route('users.store') }}" id="user-form" method="post">
                             @csrf
-
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="name-input">Họ và tên <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('name') }}" id="name-input" name="name">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name-input" name="name">
                                         @error('name')
-                                        <label id="error-name" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                        <div id="error-name" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="username-input">Tên đăng nhập <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('username') }}" id="username-input" name="username">
+                                        <input type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" id="username-input" name="username">
                                         @error('username')
-                                        <label id="error-username" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                        <div id="error-username" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -66,9 +65,9 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="email-input">Email <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('email') }}" id="email-input" name="email">
+                                        <input type="text" class="form-control  @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email-input" name="email">
                                         @error('email')
-                                        <label id="error-email" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                        <div id="error-email" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>

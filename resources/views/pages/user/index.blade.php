@@ -90,14 +90,14 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto" style="">
-                                                    <a href="{{ route('users.edit', ['id' => $user->id]) }}"
+                                                    <a href="{{ route('users.edit', ['user' => $user->id]) }}"
                                                        class="dropdown-item">
                                                         <i class="ph-pencil-simple-line me-2"></i>
                                                         Chỉnh sửa
                                                     </a>
                                                     @if ($user->id !== auth()->id())
                                                         <div class="dropdown-divider"></div>
-                                                        <form action="{{ route('users.destroy', ['id' => $user->id]) }}" method="post">
+                                                        <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
                                                             @method('delete')
                                                             @csrf
                                                             <button type="button" class="btn-delete dropdown-item text-danger">

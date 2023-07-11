@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class UserRole extends Enum implements LocalizedEnum
 {
-    const Admin = 'admin';
-    const User = 'user';
+    public const Admin = 'admin';
+    public const User = 'user';
 }

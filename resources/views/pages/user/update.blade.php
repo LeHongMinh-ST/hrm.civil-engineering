@@ -39,7 +39,7 @@
                         <div class="title bold"><i class="ph-squares-four"></i> Thông tin chung</div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('users.update', ['id' => $user->id]) }}" id="user-form" method="post">
+                        <form action="{{ route('users.update', ['user' => $user->id]) }}" id="user-form" method="post">
                             @method('put')
                             @csrf
 
@@ -47,18 +47,18 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="name-input">Họ và tên <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('name', $user->name) }}" id="name-input" name="name">
+                                        <input type="text" class="form-control @error('name', $user->name) is-invalid @enderror" value="{{ old('name') }}" id="name-input" name="name">
                                         @error('name')
-                                        <label id="error-name" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                        <div id="error-name" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="username-input">Tên đăng nhập <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('username', $user->username) }}" id="username-input" name="username">
+                                        <input type="text" class="form-control @error('username', $user->username) is-invalid @enderror" value="{{ old('username') }}" id="username-input" name="username">
                                         @error('username')
-                                        <label id="error-username" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                        <div id="error-username" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -67,9 +67,9 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="email-input">Email <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('email', $user->email) }}" id="email-input" name="email">
+                                        <input type="text" class="form-control  @error('email', $user->email) is-invalid @enderror" value="{{ old('email') }}" id="email-input" name="email">
                                         @error('email')
-                                        <label id="error-email" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                        <div id="error-email" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>

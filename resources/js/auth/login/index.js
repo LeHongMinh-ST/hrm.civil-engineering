@@ -2,19 +2,23 @@ const idBtnLogin = $('#btn-login')
 const idBtnSend = $('#btn-send')
 $(document).ready(() => {
 
-    $("#username").keyup(() => {
+    $("#username").keyup((e) => {
+        $(e.currentTarget).removeClass('is-invalid')
         $("#error-username").addClass('d-none')
     })
 
-    $("#password").keyup(() => {
+    $("#password").keyup((e) => {
+        $(e.currentTarget).removeClass('is-invalid')
         $("#error-password").addClass('d-none')
     })
 
-    $("#password_confirmation").keyup(() => {
+    $("#password_confirmation").keyup((e) => {
+        $(e.currentTarget).removeClass('is-invalid')
         $("#error-password_confirmation").addClass('d-none')
     })
 
-    $("#input-email").keyup(() => {
+    $("#input-email").keyup((e) => {
+        $(e.currentTarget).removeClass('is-invalid')
         $("#error-email").addClass('d-none')
     })
 

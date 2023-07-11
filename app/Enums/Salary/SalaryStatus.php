@@ -12,7 +12,7 @@ use BenSampo\Enum\Enum;
  */
 final class SalaryStatus extends Enum implements LocalizedEnum
 {
-    const Paid = 'paid';
-    const Unpaid = 'unpaid';
-    const Owed = 'owed';
+    public const Paid = 'paid';
+    public const Unpaid = 'unpaid';
+    public const Owed = 'owed';
 }

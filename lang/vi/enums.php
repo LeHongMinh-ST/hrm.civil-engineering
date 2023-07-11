@@ -3,6 +3,7 @@
 use App\Enums\Salary\SalaryAdvancesType;
 use App\Enums\Salary\SalaryStatus;
 use App\Enums\User\UserRole;
+use App\Enums\Worker\WorkerStatus;
 
 return [
     UserRole::class => [
@@ -17,5 +18,9 @@ return [
     SalaryAdvancesType::class => [
         SalaryAdvancesType::Advances => 'Ứng lương',
         SalaryAdvancesType::Payment => 'Thanh toán',
+    ],
+    WorkerStatus::class => [
+        WorkerStatus::InWorking => 'Đang làm',
+        WorkerStatus::Quit => 'Đã nghỉ',
     ]
 ];

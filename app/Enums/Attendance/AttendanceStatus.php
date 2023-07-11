@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class AttendanceStatus extends Enum
 {
-    const Full = 'full';
-    const Half = 'half';
-    const Ro = 'ro';
+    public const Full = 'full';
+    public const Half = 'half';
+    public const Ro = 'ro';
 }

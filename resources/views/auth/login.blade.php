@@ -48,14 +48,14 @@
                             <div class="mb-3">
                                 <label class="form-label" for="username">Tài khoản/Email</label>
                                 <div class="form-control-feedback form-control-feedback-start">
-                                    <input type="text" class="form-control" id="username" value="{{ old('username') }}"
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" value="{{ old('username') }}"
                                            name="username" placeholder="john@doe.com">
                                     <div class="form-control-feedback-icon">
                                         <i class="ph-user-circle text-muted"></i>
                                     </div>
                                 </div>
                                 @error('username')
-                                <label id="error-username" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                <div id="error-username" class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -63,14 +63,14 @@
                                 <label class="form-label" for="password">Mật khẩu</label>
                                 <div class="form-control-feedback form-control-feedback-start">
                                     <input type="password" id="password" value="{{ old('password') }}"
-                                           name="password" class="form-control" placeholder="•••••••••••">
+                                           name="password" class="form-control @error('password') is-invalid @enderror" placeholder="•••••••••••">
                                     <div class="form-control-feedback-icon">
                                         <i class="ph-lock text-muted"></i>
                                     </div>
 
                                 </div>
                                 @error('password')
-                                <label id="error-password" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                <div id="error-password" class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 

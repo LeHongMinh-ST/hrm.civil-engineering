@@ -47,13 +47,24 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function setPasswordAttribute($password)
+    /**
+     * Set hashed password
+     *
+     * @param $password
+     * @return void
+     */
+    public function setPasswordAttribute($password): void
     {
         $this->attributes['password'] = Hash::make($password);
     }
 
 
-    public function getRoleTextAttribute()
+    /**
+     * Get element role attribute
+     *
+     * @return string
+     */
+    public function getRoleTextAttribute(): string
     {
         return match ($this->role) {
             UserRole::Admin => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-warning">' . UserRole::getDescription($this->role) . '</span>',

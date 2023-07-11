@@ -1,10 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Requests\User;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @class StoreUserRequest
+ */
 class StoreUserRequest extends FormRequest
 {
     /**
@@ -29,8 +33,8 @@ class StoreUserRequest extends FormRequest
         ];
     }
 
-
     /**
+     * Get custom attributes for validator errors.
      *
      * @return array
      */
