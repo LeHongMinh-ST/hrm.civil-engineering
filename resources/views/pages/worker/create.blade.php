@@ -26,71 +26,130 @@
 
 @section('page-content')
     <div class="content">
-
-        <!-- Main charts -->
-        <!-- /main charts -->
-
-
-        <!-- Dashboard content -->
+        <!-- Content -->
         <div class="row">
-            <div class="col-9">
+            <div class="col-12 col-xl-9">
                 <div class="card">
                     <div class="card-header">
-                        <div class="title bold"><i class="ph-squares-four"></i> Thông tin chung</div>
+                        <div class="title bold"><i class="ph-squares-four me-1"></i> Thông tin chung</div>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('workers.store') }}" id="worker-form" method="post">
                             @csrf
-
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name-input">Họ và tên <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('name') }}" id="name-input" name="name">
-                                        @error('name')
-                                        <label id="error-name" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
-                                        @enderror
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group text-center">
+                                        <div class="card-img-actions d-inline-block mb-3">
+                                            <div id="holder" class="image-preview">
+                                                <img class="img-fluid" id="holder"
+                                                     src="{{ asset(config('constants.user_image_default')) }}"
+                                                     width="150" height="150" alt="">
+                                            </div>
+                                            <div class="card-img-actions-overlay card-img">
+                                                <label for="image"></label><input id="image" type="text" hidden
+                                                                                  name="thumbnail">
+                                                <a href="javascript:void(0)" id="lfm" data-input="image" data-preview="holder"
+                                                   class="btn btn-outline-white btn-icon rounded-pill me-1">
+                                                    <i class="ph-pencil"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" id="lfm" data-input="image" data-preview="holder"
+                                                   class="btn btn-outline-white btn-icon rounded-pill">
+                                                    <i class="ph-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="workername-input">Tên đăng nhập <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('workername') }}" id="workername-input" name="workername">
-                                        @error('workername')
-                                        <label id="error-workername" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                                <div class="col-12 col-md-9">
+                                    <div class="form-group mb-3">
+                                        <label for="name-input">Họ và tên <span class="text-danger">*</span>:</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                               value="{{ old('name') }}" id="name-input" name="name">
+                                        @error('name')
+                                        <div id="error-name" class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="dob-input">Ngày sinh:</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="ph-calendar"></i></span>
+                                            <input type="text" class="form-control daterange-single @error('dob') is-invalid @enderror"
+                                                   value="{{ old('dob') }}" id="dob-input" name="dob">
+                                        </div>
+                                        @error('dob')
+                                        <div id="error-name" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="email-input">Email <span class="text-danger">*</span>:</label>
-                                        <input type="text" class="form-control" value="{{ old('email') }}" id="email-input" name="email">
-                                        @error('email')
-                                        <label id="error-email" class="validation-error-label text-danger" for="basic">{{ $message }}</label>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group  mb-3">
+                                        <label for="phone-input">Số điện thoại:</label>
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                               value="{{ old('phone') }}" id="phone-input" name="phone">
+                                        @error('phone')
+                                        <div id="error-phone" class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group  mb-3">
+                                        <label for="citizen_identification-input">CMT/CCCD:</label>
+                                        <input type="text"
+                                               class="form-control @error('citizen_identification') is-invalid @enderror"
+                                               value="{{ old('citizen_identification') }}"
+                                               id="citizen_identification-input" name="citizen_identification">
+                                        @error('citizen_identification')
+                                        <div id="error-phone" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="title bold"><i class="ph-coins me-1"></i> Hệ số lương</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group mb-3">
+                                    <label for="coefficients_salary-input"></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control money @error('coefficients_salary') is-invalid @enderror"
+                                               value="{{ old('coefficients_salary', 0) }}" id="coefficients_salary-input" name="coefficients_salary">
+                                        <span class="input-group-text">VNĐ</span>
+                                    </div>
 
+                                    @error('coefficients_salary')
+                                    <div id="error-coefficients_salary" class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-xl-3">
                 <div class="card">
                     <div class="card-header">
-                        <div class="title bold"><i class="ph-gear"></i> Tác vụ</div>
+                        <div class="title bold"><i class="ph-gear me-1"></i> Tác vụ</div>
                     </div>
                     <div class="card-body">
-                        <button class="btn btn-teal mr-2" id="btn-submit"><i class="ph-paper-plane-tilt me-1"></i> Tạo mới</button>
-                        <a href="{{ route('workers.index') }}" class="btn btn-warning mr-2"><i class="ph-arrow-u-up-left me-1"></i> Quay lại</a>
+                        <button class="btn btn-teal mr-2 mb-2" id="btn-submit"><i class="ph-paper-plane-tilt me-1"></i>
+                            Tạo mới
+                        </button>
+                        <a href="{{ route('workers.index') }}" class="btn btn-warning mr-2 mb-2"><i
+                                class="ph-arrow-u-up-left me-1"></i> Quay lại</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /dashboard content -->
+        <!-- /content -->
 
     </div>
 @endsection

@@ -3,7 +3,7 @@
 <link href="{{ asset('assets/icons/phosphor/styles.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/all.min.css') }}" id="stylesheet" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/noty/noty.min.css') }}" id="stylesheet" rel="stylesheet" type="text/css">
-
+@vite(['resources/css/app.scss'])
 <!-- /global stylesheets -->
 
 {{--<!-- Css custom -->--}}

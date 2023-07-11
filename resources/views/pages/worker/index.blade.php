@@ -79,10 +79,10 @@
                                 @forelse($workers as $worker)
                                     <tr>
                                         <td class="text-center">{{ getIndexTable($loop->index, $workers) }}</td>
-                                        <td>{{$worker->name}}</td>
-                                        <td class="text-center">{{$worker->dob}}</td>
-                                        <td>{{$worker->phone}}</td>
-                                        <td>{{$worker->citizen_identification}}</td>
+                                        <td>{{ $worker->name }}</td>
+                                        <td class="text-center">{{ $worker->dob }}</td>
+                                        <td>{{ $worker->phone }}</td>
+                                        <td>{{ $worker->citizen_identification }}</td>
                                         <td class="text-center">{!! $worker->statusTex !!}</td>
                                         <td class="text-center">
                                             <div class="dropdown text-center">

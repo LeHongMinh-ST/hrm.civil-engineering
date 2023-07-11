@@ -78,9 +78,9 @@
                                 @forelse($users as $user)
                                     <tr>
                                         <td class="text-center">{{ getIndexTable($loop->index, $users) }}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->username}}</td>
-                                        <td>{{$user->email}}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->username }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td class="text-center">{!! $user->roleText !!}</td>
                                         <td class="text-center">
                                             <div class="dropdown text-center">

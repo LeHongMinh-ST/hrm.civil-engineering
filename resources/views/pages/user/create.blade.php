@@ -27,23 +27,19 @@
 @section('page-content')
     <div class="content">
 
-        <!-- Main charts -->
-        <!-- /main charts -->
-
-
-        <!-- Dashboard content -->
+        <!-- Content -->
         <div class="row">
-            <div class="col-9">
+            <div class="col-12 col-xl-9">
                 <div class="card">
                     <div class="card-header">
-                        <div class="title bold"><i class="ph-squares-four"></i> Thông tin chung</div>
+                        <div class="title bold"><i class="ph-squares-four me-1"></i> Thông tin chung</div>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('users.store') }}" id="user-form" method="post">
                             @csrf
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group mb-3">
                                         <label for="name-input">Họ và tên <span class="text-danger">*</span>:</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name-input" name="name">
                                         @error('name')
@@ -51,8 +47,8 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group mb-3">
                                         <label for="username-input">Tên đăng nhập <span class="text-danger">*</span>:</label>
                                         <input type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" id="username-input" name="username">
                                         @error('username')
@@ -61,9 +57,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row">
                                 <div class="col">
-                                    <div class="form-group">
+                                    <div class="form-group mb-3">
                                         <label for="email-input">Email <span class="text-danger">*</span>:</label>
                                         <input type="text" class="form-control  @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email-input" name="email">
                                         @error('email')
@@ -77,10 +73,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-xl-3">
                 <div class="card">
                     <div class="card-header">
-                        <div class="title bold"><i class="ph-gear"></i> Tác vụ</div>
+                        <div class="title bold"><i class="ph-gear me-1"></i> Tác vụ</div>
                     </div>
                     <div class="card-body">
                         <button class="btn btn-teal mr-2" id="btn-submit"><i class="ph-paper-plane-tilt me-1"></i> Tạo mới</button>
@@ -89,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <!-- /dashboard content -->
+        <!-- /content -->
 
     </div>
 @endsection

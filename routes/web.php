@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,9 @@ Route::middleware('preventBackHistory')->group(function () {
 
         Route::resource('users',UserController::class)->except(['show']);
         Route::resource('workers',WorkerController::class);
+    });
+
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        Lfm::routes();
     });
 });

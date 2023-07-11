@@ -21,4 +21,6 @@ $(document).ready(() => {
             $('#user-form').submit()
         }
     })
+
+    $('#lfm').filemanager('image', {prefix: '/filemanager'});
 })

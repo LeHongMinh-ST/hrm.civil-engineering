@@ -1,0 +1,12 @@
+.image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: var(--card-border-radius);
+
+    img {
+        width: 150px;
+        height: 150px !important;
+        border-radius: var(--card-border-radius);
+    }
+}
+
