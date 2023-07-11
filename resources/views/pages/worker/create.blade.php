@@ -48,11 +48,13 @@
                                             <div class="card-img-actions-overlay card-img">
                                                 <label for="image"></label><input id="image" type="text" hidden
                                                                                   name="thumbnail">
-                                                <a href="javascript:void(0)" id="lfm" data-input="image" data-preview="holder"
+                                                <a href="javascript:void(0)" id="lfm" data-input="image"
+                                                   data-preview="holder"
                                                    class="btn btn-outline-white btn-icon rounded-pill me-1">
                                                     <i class="ph-pencil"></i>
                                                 </a>
-                                                <a href="javascript:void(0)" id="lfm" data-input="image" data-preview="holder"
+                                                <a href="javascript:void(0)" id="lfm" data-input="image"
+                                                   data-preview="holder"
                                                    class="btn btn-outline-white btn-icon rounded-pill">
                                                     <i class="ph-trash"></i>
                                                 </a>
@@ -74,7 +76,8 @@
 
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="ph-calendar"></i></span>
-                                            <input type="text" class="form-control daterange-single @error('dob') is-invalid @enderror"
+                                            <input type="text"
+                                                   class="form-control daterange-single @error('dob') is-invalid @enderror"
                                                    value="{{ old('dob') }}" id="dob-input" name="dob">
                                         </div>
                                         @error('dob')
@@ -107,6 +110,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group  mb-3">
+                                        <label for="address-input">Địa chỉ:</label>
+                                        <textarea type="text" class="form-control @error('address') is-invalid @enderror"
+                                                  id="address-input" name="phone">{{ old('address') }}</textarea>
+                                        @error('phone')
+                                        <div id="error-address" class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -120,13 +135,16 @@
                                 <div class="form-group mb-3">
                                     <label for="coefficients_salary-input"></label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control money @error('coefficients_salary') is-invalid @enderror"
-                                               value="{{ old('coefficients_salary', 0) }}" id="coefficients_salary-input" name="coefficients_salary">
+                                        <input type="text"
+                                               class="form-control money @error('coefficients_salary') is-invalid @enderror"
+                                               value="{{ old('coefficients_salary', 0) }}"
+                                               id="coefficients_salary-input" name="coefficients_salary">
                                         <span class="input-group-text">VNĐ</span>
                                     </div>
 
                                     @error('coefficients_salary')
-                                    <div id="error-coefficients_salary" class="invalid-feedback d-block">{{ $message }}</div>
+                                    <div id="error-coefficients_salary"
+                                         class="invalid-feedback d-block">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
