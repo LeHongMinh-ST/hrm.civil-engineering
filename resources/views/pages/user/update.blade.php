@@ -34,7 +34,8 @@
                         <div class="title bold"><i class="ph-squares-four me-1"></i> Thông tin chung</div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('users.update', ['user' => $user->id]) }}" id="user-form" method="post">
+                        <form action="{{ route('users.update', ['user' => $user->id, ...request()->query()]) }}"
+                              id="user-form" method="post">
                             @method('put')
                             @csrf
                             <div class="row">
@@ -55,7 +56,8 @@
                                                 class="text-danger">*</span>:</label>
                                         <input type="text"
                                                class="form-control @error('username') is-invalid @enderror"
-                                               value="{{ old('username', $user->username) }}" id="username-input" name="username">
+                                               value="{{ old('username', $user->username) }}" id="username-input"
+                                               name="username">
                                         @error('username')
                                         <div id="error-username" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
@@ -89,7 +91,7 @@
                         <button class="btn btn-teal mr-2 mb-2" id="btn-submit"><i class="ph-paper-plane-tilt me-1"></i>
                             Lưu
                         </button>
-                        <a href="{{ route('users.index') }}" class="btn btn-warning mr-2 mb-2"><i
+                        <a href="{{ route('users.index',  request()->query()) }}" class="btn btn-warning mr-2 mb-2"><i
                                 class="ph-arrow-u-up-left me-1"></i> Quay lại</a>
                     </div>
                 </div>

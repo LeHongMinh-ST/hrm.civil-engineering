@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * @class WorkerController
+ *
+ * @package App\Http\Controller
+ *
+ * @author Lê Hồng Minh <minhhl298.st@gmail.com>
  */
 class WorkerController extends Controller
 {
@@ -32,7 +36,9 @@ class WorkerController extends Controller
         $workers = Worker::query()
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', "%$search%");
-            })->paginate(config('constants.limit_paginate'));
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('constants.limit_paginate'));
 
         return view('pages.worker.index')->with('workers', $workers);
     }
@@ -62,7 +68,6 @@ class WorkerController extends Controller
      * @param StoreWorkerRequest $request
      * @return RedirectResponse
      *
-     * @throws Exception
      */
     public function store(StoreWorkerRequest $request): RedirectResponse
     {
@@ -98,9 +103,6 @@ class WorkerController extends Controller
      *
      * @param string $id
      * @return Application|Factory|View
-     *
-     * @throws Exception
-     *
      */
     public function edit(string $id): Application|Factory|View
     {
@@ -115,8 +117,6 @@ class WorkerController extends Controller
      * @param StoreWorkerRequest $request
      * @param string $id
      * @return RedirectResponse
-     *
-     * @throws Exception
      */
     public function update(Request $request, string $id): RedirectResponse
     {
@@ -132,7 +132,7 @@ class WorkerController extends Controller
 
             $request->session()->flash('success', 'Cập nhật thợ thành công');
 
-            return redirect()->route('workers.index');
+            return redirect()->route('workers.index', $request->query());
         } catch (Exception $e) {
             Log::error('Error update worker', [
                 'method' => __METHOD__,
@@ -141,19 +141,18 @@ class WorkerController extends Controller
 
             return redirect()->back()
                 ->withErrors(['error' => ['Không thể cập nhật thợ']])
-                ->withInput();
+                ->withInput($request->query());
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param Request $request
      * @param string $id
      * @return RedirectResponse
-     *
-     * @throws Exception
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Request $request, string $id): RedirectResponse
     {
         $worker = Worker::findOrFail($id);
 
@@ -162,7 +161,7 @@ class WorkerController extends Controller
 
             session()->flash('success', 'Xóa thợ thành công');
 
-            return redirect()->route('worker.index');
+            return redirect()->route('workers.index', $request->query());
 
         } catch (Exception $e) {
             Log::error('Error delete worker', [
@@ -172,7 +171,7 @@ class WorkerController extends Controller
 
             return redirect()->back()
                 ->withErrors(['error' => ['Không thể xóa thợ']])
-                ->withInput();
+                ->withInput($request->query());
         }
     }
 }

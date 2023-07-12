@@ -27,15 +27,15 @@
 @section('page-content')
     <div class="content">
         <!-- Content -->
-        <div class="row">
-            <div class="col-12 col-xl-9">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="title bold"><i class="ph-squares-four me-1"></i> Thông tin chung</div>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('workers.store') }}" id="worker-form" method="post">
-                            @csrf
+        <form action="{{ route('workers.store') }}" id="worker-form" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-12 col-xl-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="title bold"><i class="ph-squares-four me-1"></i> Thông tin chung</div>
+                        </div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <div class="form-group text-center">
@@ -52,11 +52,6 @@
                                                    data-preview="holder"
                                                    class="btn btn-outline-white btn-icon rounded-pill me-1">
                                                     <i class="ph-pencil"></i>
-                                                </a>
-                                                <a href="javascript:void(0)" id="lfm" data-input="image"
-                                                   data-preview="holder"
-                                                   class="btn btn-outline-white btn-icon rounded-pill">
-                                                    <i class="ph-trash"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -114,59 +109,62 @@
                                 <div class="col-12">
                                     <div class="form-group  mb-3">
                                         <label for="address-input">Địa chỉ:</label>
-                                        <textarea type="text" class="form-control @error('address') is-invalid @enderror"
-                                                  id="address-input" name="phone">{{ old('address') }}</textarea>
+                                        <textarea type="text"
+                                                  class="form-control @error('address') is-invalid @enderror"
+                                                  id="address-input" name="address">{{ old('address') }}</textarea>
                                         @error('phone')
                                         <div id="error-address" class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="title bold"><i class="ph-coins me-1"></i> Hệ số lương</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <div class="form-group mb-3">
-                                    <label for="coefficients_salary-input"></label>
-                                    <div class="input-group">
-                                        <input type="text"
-                                               class="form-control money @error('coefficients_salary') is-invalid @enderror"
-                                               value="{{ old('coefficients_salary', 0) }}"
-                                               id="coefficients_salary-input" name="coefficients_salary">
-                                        <span class="input-group-text">VNĐ</span>
-                                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="title bold"><i class="ph-coins me-1"></i> Hệ số lương</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group mb-3">
+                                        <label for="coefficients_salary-input"></label>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   class="form-control money @error('coefficients_salary') is-invalid @enderror"
+                                                   value="{{ old('coefficients_salary', 0) }}"
+                                                   id="coefficients_salary-input" name="coefficients_salary">
+                                            <span class="input-group-text">VNĐ</span>
+                                        </div>
 
-                                    @error('coefficients_salary')
-                                    <div id="error-coefficients_salary"
-                                         class="invalid-feedback d-block">{{ $message }}</div>
-                                    @enderror
+                                        @error('coefficients_salary')
+                                        <div id="error-coefficients_salary"
+                                             class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-xl-3">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="title bold"><i class="ph-gear me-1"></i> Tác vụ</div>
-                    </div>
-                    <div class="card-body">
-                        <button class="btn btn-teal mr-2 mb-2" id="btn-submit"><i class="ph-paper-plane-tilt me-1"></i>
-                            Tạo mới
-                        </button>
-                        <a href="{{ route('workers.index') }}" class="btn btn-warning mr-2 mb-2"><i
-                                class="ph-arrow-u-up-left me-1"></i> Quay lại</a>
+                <div class="col-12 col-xl-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="title bold"><i class="ph-gear me-1"></i> Tác vụ</div>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-teal mr-2 mb-2" id="btn-submit" type="button"><i
+                                    class="ph-paper-plane-tilt me-1"></i>
+                                Tạo mới
+                            </button>
+                            <a href="{{ route('workers.index', request()->query()) }}" class="btn btn-warning mr-2 mb-2"><i
+                                    class="ph-arrow-u-up-left me-1"></i> Quay lại</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+
         <!-- /content -->
 
     </div>

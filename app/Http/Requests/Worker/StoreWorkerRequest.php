@@ -27,7 +27,7 @@ class StoreWorkerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
         ];
     }
 
@@ -39,7 +39,7 @@ class StoreWorkerRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'name' => 'Họ và tên'
         ];
     }
 }

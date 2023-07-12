@@ -14,13 +14,16 @@ $(document).ready(() => {
         $("#error-email").addClass('d-none')
     })
     let isRequest = false
-    $('#btn-submit').click(() => {
+    $('#btn-submit').click(async () => {
+
         $('#btn-submit').prop('disabled', true)
-        if(!isRequest) {
+
+        if (!isRequest) {
             isRequest = true
-            $('#user-form').submit()
+            await $('#worker-form').submit()
+            isRequest = false
         }
     })
 
-    $('#lfm').filemanager('image', {prefix: '/filemanager'});
+    $('#lfm').filemanager('image', { prefix: '/filemanager' });
 })

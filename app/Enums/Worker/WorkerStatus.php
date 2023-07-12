@@ -2,13 +2,14 @@
 
 namespace App\Enums\Worker;
 
+use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static InWorking()
- * @method static static Quit()
+ * @const  InWorking
+ * @const  Quit
  */
-final class WorkerStatus extends Enum
+final class WorkerStatus extends Enum implements LocalizedEnum
 {
     public const InWorking = 'inWorking';
     public const Quit = 'quit';

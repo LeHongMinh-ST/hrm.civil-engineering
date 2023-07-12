@@ -6,8 +6,8 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static Admin()
- * @method static static User()
+ * @const  Admin
+ * @const  User
  */
 final class UserRole extends Enum implements LocalizedEnum
 {

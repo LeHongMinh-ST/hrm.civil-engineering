@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * @class UserController
+ *
+ * @package App\Http\Controller
+ *
+ * @author Lê Hồng Minh <minhhl298.st@gmail.com>
  */
 class UserController extends Controller
 {
@@ -34,7 +38,9 @@ class UserController extends Controller
                 $query->where('name', 'like', "%$search%")
                     ->orWhere('username', 'like', "%$search%")
                     ->orWhere('email', 'like', "%$search%");
-            })->paginate(config('constants.limit_paginate'));
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('constants.limit_paginate'));
 
         return view('pages.user.index')->with('users', $users);
     }
@@ -42,7 +48,8 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * * @return Application|View|Factory
+     * @return Application|View|Factory
+     *
      */
     public function create(): Application|View|Factory
     {
@@ -117,7 +124,7 @@ class UserController extends Controller
 
             $request->session()->flash('success', 'Cập nhật tài khoản thành công');
 
-            return redirect()->route('users.index');
+            return redirect()->route('users.index', request()->query());
         } catch (Exception $e) {
             Log::error('Error update user', [
                 'method' => __METHOD__,
@@ -126,7 +133,7 @@ class UserController extends Controller
 
             return redirect()->back()
                 ->withErrors(['error' => ['Không thể cập nhật tài khoản']])
-                ->withInput();
+                ->withInput(request()->query());
         }
     }
 
@@ -134,9 +141,10 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param string $id
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(Request $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
 
@@ -153,7 +161,7 @@ class UserController extends Controller
 
             session()->flash('success', 'Xóa tài khoản thành công');
 
-            return redirect()->route('users.index');
+            return redirect()->route('users.index', $request->query());
 
         } catch (Exception $e) {
             Log::error('Error delete user', [
@@ -163,7 +171,7 @@ class UserController extends Controller
 
             return redirect()->back()
                 ->withErrors(['error' => ['Không thể xóa tài khoản']])
-                ->withInput();
+                ->withInput($request->query());
         }
     }
 }

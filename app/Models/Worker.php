@@ -46,10 +46,20 @@ class Worker extends Model
         'citizen_identification_back_image',
     ];
 
-    public function getStatusTextAttributes()
+    public function setCoefficientsSalaryAttribute($coefficientsSalary)
+    {
+        $this->attributes['coefficients_salary'] = (int) (str_ireplace(',', '', $coefficientsSalary));
+    }
+
+    /**
+     * Get the status text element
+     *
+     * @return string
+     */
+    public function getStatusTextAttribute(): string
     {
         return match ($this->status) {
-            WorkerStatus::InWorking => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-primary border-warning">' . WorkerStatus::getDescription($this->status) . '</span>',
+            WorkerStatus::InWorking => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-success">' . WorkerStatus::getDescription($this->status) . '</span>',
             default => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-warning">' . WorkerStatus::getDescription($this->status) . '</span>',
         };
     }

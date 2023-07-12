@@ -54,7 +54,7 @@
 
                             </div>
                             <div class="content-action">
-                                <a href="{{route('workers.create')}}" class="btn btn-teal"><i
+                                <a href="{{route('workers.create', request()->query())}}" class="btn btn-teal"><i
                                         class="ph-plus-circle me-1"></i> Tạo mới</a>
                             </div>
                         </div>
@@ -71,7 +71,8 @@
                                     <th class="text-center">Ngày sinh</th>
                                     <th>Số điện thoại</th>
                                     <th>CMT/CCCD</th>
-                                    <th>Trạng thái</th>
+                                    <th class="text-center">Hệ số lương</th>
+                                    <th class="text-center">Trạng thái</th>
                                     <th class="text-center" width="10%">Hành động</th>
                                 </tr>
                                 </thead>
@@ -80,10 +81,14 @@
                                     <tr>
                                         <td class="text-center">{{ getIndexTable($loop->index, $workers) }}</td>
                                         <td>{{ $worker->name }}</td>
-                                        <td class="text-center">{{ $worker->dob }}</td>
-                                        <td>{{ $worker->phone }}</td>
-                                        <td>{{ $worker->citizen_identification }}</td>
-                                        <td class="text-center">{!! $worker->statusTex !!}</td>
+                                        <td class="text-center">{{ $worker->dob ?? 'Chưa có' }}</td>
+                                        <td>{{ $worker->phone ?? 'Chưa có' }}</td>
+                                        <td>{{ $worker->citizen_identification ?? 'Chưa có' }}</td>
+                                        <td class="text-center">
+                                            {{ $worker->coefficients_salary ? number_format($worker->coefficients_salary) : 0 }}
+                                            VNĐ/1 ngày công
+                                        </td>
+                                        <td class="text-center">{!! $worker->statusText !!}</td>
                                         <td class="text-center">
                                             <div class="dropdown text-center">
                                                 <a href="#" class="text-body" data-bs-toggle="dropdown"
@@ -92,30 +97,35 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto" style="">
-                                                    <a href="{{ route('workers.edit', ['id' => $worker->id]) }}"
+                                                    <a href="{{ route('workers.show', ['worker' => $worker->id]) }}"
+                                                       class="dropdown-item">
+                                                        <i class="ph-user me-2"></i>
+                                                        Xem chi tiết
+                                                    </a>
+                                                    <a href="{{ route('workers.edit', ['worker' => $worker->id, ...request()->query()]) }}"
                                                        class="dropdown-item">
                                                         <i class="ph-pencil-simple-line me-2"></i>
                                                         Chỉnh sửa
                                                     </a>
-                                                    @if ($worker->id !== auth()->id())
-                                                        <div class="dropdown-divider"></div>
-                                                        <form action="{{ route('workers.destroy', ['id' => $worker->id]) }}" method="post">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button type="button" class="btn-delete dropdown-item text-danger">
-                                                                <i class="ph-trash me-2"></i>
-                                                                Xoá
-                                                            </button>
-                                                        </form>
-
-                                                    @endif
+                                                    <div class="dropdown-divider"></div>
+                                                    <form
+                                                        action="{{ route('workers.destroy', ['worker' => $worker->id, ...request()->query()]) }}"
+                                                        method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button type="button"
+                                                                class="btn-delete dropdown-item text-danger">
+                                                            <i class="ph-trash me-2"></i>
+                                                            Xoá
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7">
+                                        <td colspan="8">
                                             <div class="empty-table text-center">
                                                 <div class="image-empty">
                                                     <img src="{{ asset(config('constants.empty_image')) }}"

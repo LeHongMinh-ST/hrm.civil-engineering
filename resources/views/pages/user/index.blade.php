@@ -54,7 +54,7 @@
 
                             </div>
                             <div class="content-action">
-                                <a href="{{route('users.create')}}" class="btn btn-teal"><i
+                                <a href="{{route('users.create', request()->query())}}" class="btn btn-teal"><i
                                         class="ph-plus-circle me-1"></i> Tạo mới</a>
                             </div>
                         </div>
@@ -90,14 +90,14 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto" style="">
-                                                    <a href="{{ route('users.edit', ['user' => $user->id]) }}"
+                                                    <a href="{{ route('users.edit', ['user' => $user->id, ...request()->query()]) }}"
                                                        class="dropdown-item">
                                                         <i class="ph-pencil-simple-line me-2"></i>
                                                         Chỉnh sửa
                                                     </a>
                                                     @if ($user->id !== auth()->id())
                                                         <div class="dropdown-divider"></div>
-                                                        <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
+                                                        <form action="{{ route('users.destroy', ['user' => $user->id, ...request()->query()]) }}" method="post">
                                                             @method('delete')
                                                             @csrf
                                                             <button type="button" class="btn-delete dropdown-item text-danger">

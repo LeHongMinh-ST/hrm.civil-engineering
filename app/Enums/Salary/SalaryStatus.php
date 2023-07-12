@@ -6,9 +6,9 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static Paid()
- * @method static static Unpaid()
- * @method static static Owed()
+ * @const  Paid
+ * @const  Unpaid
+ * @const  Owed
  */
 final class SalaryStatus extends Enum implements LocalizedEnum
 {

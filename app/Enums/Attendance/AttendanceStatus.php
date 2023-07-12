@@ -5,9 +5,9 @@ namespace App\Enums\Attendance;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static Full()
- * @method static static Half()
- * @method static static Ro()
+ * @const Full
+ * @const Half
+ * @const Ro
  */
 final class AttendanceStatus extends Enum
 {

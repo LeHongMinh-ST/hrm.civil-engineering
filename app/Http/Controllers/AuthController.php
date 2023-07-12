@@ -42,6 +42,7 @@ class AuthController extends Controller
     {
 
         $request->merge([$this->username() => request()->input('username')]);
+
         $credentials = request([$this->username(), 'password']);
 
         $rememberMe = $request->has('remember');

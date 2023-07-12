@@ -6,8 +6,8 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static Payment()
- * @method static static Advances()
+ * @const  Payment
+ * @const  Advances
  */
 final class SalaryAdvancesType extends Enum implements LocalizedEnum
 {
