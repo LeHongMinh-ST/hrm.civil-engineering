@@ -1,15 +1,23 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\AuthLoginRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
 
+/**
+ * @class AuthController
+ * About the Auth Controller
+ *
+ * @package App\Http\Controller
+ *
+ * @author Lê Hồng Minh <minhhl298.st@gmail.com>
+ */
 class AuthController extends Controller
 {
 

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Salary;
 use Illuminate\Http\Request;
 
+/**
+ *@class SalaryController
+ *
+ *
+ */
 class SalaryController extends Controller
 {
     /**
