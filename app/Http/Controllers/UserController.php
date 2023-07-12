@@ -10,7 +10,6 @@ use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -93,25 +92,9 @@ class UserController extends Controller
      */
     public function edit(string $id): Application|Factory|View
     {
-        try {
-            $user = User::find($id);
+        $user = User::findOrFail($id);
 
-            if (!$user) {
-                throw new ModelNotFoundException('User not found');
-            }
-
-            return view('pages.user.update')->with(['user' => $user]);
-
-        } catch (ModelNotFoundException $e) {
-
-            Log::error('Error edit user', [
-                'method' => __METHOD__,
-                'message' => $e->getMessage()
-            ]);
-
-            abort(404);
-        }
-
+        return view('pages.user.update')->with(['user' => $user]);
     }
 
     /**
@@ -125,13 +108,9 @@ class UserController extends Controller
     {
         $data = $request->only(['name', 'username', 'email']);
 
+        $user = User::findOrFail($id);
+
         try {
-            $user = User::find($id);
-
-            if (!$user) {
-                throw new ModelNotFoundException('User not found');
-            }
-
             $user->fill($data);
 
             $user->save();
@@ -139,14 +118,6 @@ class UserController extends Controller
             $request->session()->flash('success', 'Cập nhật tài khoản thành công');
 
             return redirect()->route('users.index');
-        } catch (ModelNotFoundException $e) {
-            Log::error('Error update user', [
-                'method' => __METHOD__,
-                'message' => $e->getMessage()
-            ]);
-
-            abort(404);
-
         } catch (Exception $e) {
             Log::error('Error update user', [
                 'method' => __METHOD__,
@@ -167,13 +138,9 @@ class UserController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
+        $user = User::findOrFail($id);
+
         try {
-            $user = User::find($id);
-
-            if (!$user) {
-                throw new ModelNotFoundException('User not found');
-            }
-
             if ($user->role === UserRole::Admin) {
                 throw new Exception('User is admin');
             }
@@ -187,14 +154,6 @@ class UserController extends Controller
             session()->flash('success', 'Xóa tài khoản thành công');
 
             return redirect()->route('users.index');
-
-        } catch (ModelNotFoundException $e) {
-            Log::error('Error delete user', [
-                'method' => __METHOD__,
-                'message' => $e->getMessage()
-            ]);
-
-            abort(404);
 
         } catch (Exception $e) {
             Log::error('Error delete user', [

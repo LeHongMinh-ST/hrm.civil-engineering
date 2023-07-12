@@ -49,9 +49,20 @@ class WorkerController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    public function show(string $id)
+    {
+        $worker = Worker::findOrFail($id);
+        dd($worker);
+    }
+
+    /**
+     * Store a newly created resource in storage.
      *
      * @param StoreWorkerRequest $request
      * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function store(StoreWorkerRequest $request): RedirectResponse
     {
@@ -87,28 +98,15 @@ class WorkerController extends Controller
      *
      * @param string $id
      * @return Application|Factory|View
+     *
+     * @throws Exception
+     *
      */
     public function edit(string $id): Application|Factory|View
     {
-        try {
-            $worker = Worker::find($id);
+        $worker = Worker::findOrFail($id);
 
-            if (!$worker) {
-                throw new ModelNotFoundException('Worker not found');
-            }
-
-            return view('pages.worker.update')->with(['worker' => $worker]);
-
-        } catch (ModelNotFoundException $e) {
-
-            Log::error('Error edit worker', [
-                'method' => __METHOD__,
-                'message' => $e->getMessage()
-            ]);
-
-            abort(404);
-        }
-
+        return view('pages.worker.update')->with(['worker' => $worker]);
     }
 
     /**
@@ -117,17 +115,16 @@ class WorkerController extends Controller
      * @param StoreWorkerRequest $request
      * @param string $id
      * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function update(Request $request, string $id): RedirectResponse
     {
         $data = $request->only(Worker::ONLY_DATA);
 
-        try {
-            $worker = Worker::find($id);
+        $worker = Worker::findOrFail($id);
 
-            if (!$worker) {
-                throw new ModelNotFoundException('Worker not found');
-            }
+        try {
 
             $worker->fill($data);
 
@@ -136,14 +133,6 @@ class WorkerController extends Controller
             $request->session()->flash('success', 'Cập nhật thợ thành công');
 
             return redirect()->route('workers.index');
-        } catch (ModelNotFoundException $e) {
-            Log::error('Error update worker', [
-                'method' => __METHOD__,
-                'message' => $e->getMessage()
-            ]);
-
-            abort(404);
-
         } catch (Exception $e) {
             Log::error('Error update worker', [
                 'method' => __METHOD__,
@@ -161,29 +150,19 @@ class WorkerController extends Controller
      *
      * @param string $id
      * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function destroy(string $id): RedirectResponse
     {
+        $worker = Worker::findOrFail($id);
+
         try {
-            $worker = Worker::find($id);
-
-            if (!$worker) {
-                throw new ModelNotFoundException('Worker not found');
-            }
-
-            Worker::destroy($id);
+            $worker->delete();
 
             session()->flash('success', 'Xóa thợ thành công');
 
             return redirect()->route('worker.index');
-
-        } catch (ModelNotFoundException $e) {
-            Log::error('Error delete worker', [
-                'method' => __METHOD__,
-                'message' => $e->getMessage()
-            ]);
-
-            abort(404);
 
         } catch (Exception $e) {
             Log::error('Error delete worker', [
