@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('attendances.index') }}" class="nav-link {{ request()->is('attendances*') ? 'active' : '' }}">
                         <i class="ph-calendar-check"></i>
                         <span>Bảng công thợ</span>
                     </a>

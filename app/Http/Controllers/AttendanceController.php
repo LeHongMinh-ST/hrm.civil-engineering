@@ -1,18 +1,31 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
+/**
+ * @class AttendanceController
+ *
+ * @package App\Http\Controller
+ *
+ * @author Lê Hồng Minh <minhhl298.st@gmail.com>
+ */
 class AttendanceController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a board of the attendance
+     *
+     * @return Factory|View|Application
      */
-    public function index()
+    public function index(): Factory|View|Application
     {
-        //
+        return view('pages.attendance.board');
     }
 
     /**

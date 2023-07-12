@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -30,8 +31,12 @@ Route::middleware('preventBackHistory')->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::resource('users',UserController::class)->except(['show']);
-        Route::resource('workers',WorkerController::class);
+        Route::resource('users', UserController::class)->except(['show']);
+        Route::resource('workers', WorkerController::class);
+
+        Route::prefix('attendances')->group(function () {
+            Route::get('/board', [AttendanceController::class, 'index'])->name('attendances.index');
+        });
     });
 
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
