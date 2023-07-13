@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col">
                 <div id="app">
-                    <attendance-board workers="{{ json_encode($workers) }}"></attendance-board>
+                    <attendance-board></attendance-board>
                 </div>
             </div>
         </div>

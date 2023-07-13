@@ -5,8 +5,12 @@ namespace App\Console\Commands;
 use App\Models\Attendance;
 use App\Models\Salary;
 use App\Models\Worker;
+use App\Services\WorkerService;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
 class CreateAttendanceMonth extends Command
@@ -32,49 +36,21 @@ class CreateAttendanceMonth extends Command
     {
         $workers = Worker::query()->get();
 
+        try {
 
-        $daysInMonth = Carbon::now()->daysInMonth;
-
-
-
-        $data = [];
-
-        foreach ($workers as $worker) {
-            $date = Carbon::now();
-
-            $salary = Salary::query()
-                ->where('worker_id', $worker->id)
-                ->where('datetime', Carbon::now()->timestamp)->first();
-
-            if (!$salary) {
-                $salary = new Salary();
-                $salary->fill([
-                    'worker_id',
-                    'coefficients_salary' => $worker->coefficients_salary,
-                    'datetime' => Carbon::now()->timestamp
-                ]);
-
-                $salary->save();
-
-                for ($i = 0; $i < $daysInMonth; $i++) {
-                    $dataDate = $date;
-
-                    $data[] = [
-                        'date' => $dataDate->timestamp,
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                    ];
-
-                    $date->add(1);
-                }
+            foreach ($workers as $worker) {
+                app(WorkerService::class)->createSalaryByWorker($worker);
             }
 
-        }
+            return CommandAlias::SUCCESS;
 
-        if (!empty($data)) {
-            Worker::insert($data);
-        }
+        } catch (Exception $exception) {
+            Log::error('Error command app:create-attendance-month', [
+                'method' => __METHOD__,
+                'message' => $exception->getMessage()
+            ]);
 
-        return CommandAlias::SUCCESS;
+            return CommandAlias::FAILURE;
+        }
     }
 }

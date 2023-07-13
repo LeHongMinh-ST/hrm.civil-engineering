@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Worker\WorkerStatus;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Worker extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEvents;
 
     /**
      * The attributes that are mass assignable.

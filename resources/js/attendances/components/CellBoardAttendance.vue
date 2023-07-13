@@ -3,7 +3,10 @@ import { ref } from "vue";
 import { AttendanceStatus, Full, Half, Ro } from "../../utils/constants.js";
 import _ from "lodash";
 
-const attendance = ref(Ro)
+const prop = defineProps(['status'])
+
+const attendance = ref(prop.status)
+
 const getAttendanceStatusLabel = () => {
     const status = AttendanceStatus.find(item => item.value === attendance.value)
     return _.get(status, 'label', '')
@@ -49,6 +52,7 @@ const setAttendance = (status) => {
 </template>
 
 <style scoped lang="scss">
+@import "../../../css/variables";
 .cell-board-attendance {
     cursor: pointer;
     width: 100%;
@@ -58,12 +62,14 @@ const setAttendance = (status) => {
         display: inline-block;
         width: 100%;
         height:100%;
+
     }
 
     .cell-item {
         justify-content: center;
         width: 100%;
         height: 100%;
+
     }
 }
 </style>

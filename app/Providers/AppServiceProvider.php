@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Worker;
+use App\Observers\WorkerObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
         }
 //        Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
+        Worker::observe(WorkerObserver::class);
     }
 }

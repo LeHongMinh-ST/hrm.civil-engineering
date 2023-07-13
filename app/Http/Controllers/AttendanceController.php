@@ -33,12 +33,7 @@ class AttendanceController extends Controller
      */
     public function index(): Factory|View|Application
     {
-        $workers = Worker::query()
-            ->where('status', WorkerStatus::InWorking)->get();
-
-        return view('pages.attendance.board')->with([
-            'workers' => $workers?->toArray()
-        ]);
+        return view('pages.attendance.board');
     }
 
     /**
@@ -51,7 +46,6 @@ class AttendanceController extends Controller
     {
         $startDayInMonth = Carbon::create("01-$month");
         $endDayInMonth = Carbon::create("01-$month")->lastOfMonth();
-
         $workers = Worker::query()
             ->where('status', WorkerStatus::InWorking)
             ->with('attendances', function ($query) use ($startDayInMonth, $endDayInMonth) {

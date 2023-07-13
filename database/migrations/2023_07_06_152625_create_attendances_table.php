@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('worker_id')->nullable();
-            $table->string('date')->nullable();
+            $table->bigInteger('date')->nullable();
             $table->string('status')->default(AttendanceStatus::Ro);
             $table->boolean('overtime')->nullable();
             $table->bigInteger('overtime_coefficients_salary')->default(0);
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
             $table->bigInteger('salary_id')->nullable();

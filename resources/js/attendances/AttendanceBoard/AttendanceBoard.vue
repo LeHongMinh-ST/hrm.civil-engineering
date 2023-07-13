@@ -5,8 +5,7 @@ import { useHelper } from "../../utils/helper.js";
 import { FORMAT_MONTH, FORMAT_MONTH_MINUS } from "../../utils/constants.js";
 import CellBoardAttendance from "../components/CellBoardAttendance.vue";
 import api from "../../api"
-
-const props = defineProps(['workers'])
+import _ from "lodash";
 
 const { formatDate } = useHelper()
 
@@ -19,14 +18,10 @@ const daysInMonth = ref(0)
 const loading = ref(false)
 
 onMounted(() => {
-    workers.value = JSON.parse(props.workers)
     date.value = moment()
     handleGetAttendanceWorker()
 })
 
-watch(props.workers, () => {
-    workers.value = JSON.parse(props.workers)
-})
 
 watch(date, (date) => {
     daysInMonth.value = date.daysInMonth()
@@ -35,8 +30,8 @@ watch(date, (date) => {
 const handleGetAttendanceWorker = async () => {
     if (!loading.value) {
         loading.value = true
-        const attendance = api.getAttendancesMonth(formatDate(date, FORMAT_MONTH_MINUS))
-        console.log(attendance)
+        const response = await api.getAttendancesMonth(formatDate(date, FORMAT_MONTH_MINUS))
+        workers.value = _.get(response, 'data.data', [])
         loading.value = false
     }
 }
@@ -73,8 +68,8 @@ const handleGetAttendanceWorker = async () => {
                         <tbody>
                         <tr v-for="(worker, index) in workers" :key="worker.id">
                             <td class="worker-name">{{ index + 1 }}. {{ worker.name }}</td>
-                            <td class="worker-attendance" v-for="day in daysInMonth" :key="day">
-                                <cell-board-attendance></cell-board-attendance>
+                            <td class="worker-attendance" v-for="attendance in worker.attendances" :key="attendance.id">
+                                <cell-board-attendance :status="attendance.status"></cell-board-attendance>
                             </td>
                             <td class="text-center total">
                                 10
