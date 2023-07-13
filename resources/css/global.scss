@@ -1,0 +1,221 @@
+@function size($number, $windowWidth: 1920) {
+    $result: 100 * $number / $windowWidth;
+    @return $result * 1vw;
+}
+
+@function sizeVH($number, $windowH: 1080) {
+    $result: 100 * $number / $windowH;
+    @return $result * 1vh;
+}
+
+@mixin pc-max {
+    @media screen and (min-width: (1440px + 1)) {
+        @content;
+    }
+}
+
+@mixin pc {
+    @media screen and (min-width: (767px + 1)) {
+        @content;
+    }
+}
+
+@mixin sp {
+    @media screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+
+.st-btn-primary {
+    background: $colorFITA !important;
+    color: $colorWhite !important;
+    font-size: 14px;
+    font-weight: 500;
+
+    &--outline {
+        background: $colorWhite;
+        color: $colorFITA;
+    }
+}
+
+.text-link {
+    color: $colorFITA;
+}
+
+.st-btn-danger {
+    background: $colorRed2 !important;
+    color: $colorWhite !important;
+    font-size: 14px;
+    font-weight: 500;
+
+    &--outline {
+        background: $colorWhite;
+        color: $colorRed2;
+    }
+}
+
+.st-bg-active {
+    background: $colorFITA !important;
+}
+
+.text-fita {
+    color: $colorFITA !important;
+}
+
+.required {
+    color: $colorRed2;
+}
+
+.st-status {
+    display: inline-block;
+    padding: 1px 8px;
+    border: 1px solid;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+
+    &.primary {
+        background: #e0ecff;
+        border-color: #8fbdec;
+        color: #0E75BCFF;
+    }
+
+    &.success {
+        background: #F6FFED;
+        border-color: #B7EB8F;
+        color: #52C41A;
+    }
+
+    &.warning {
+        background: #FFFBE6;
+        border-color: #FFE58F;
+        color: #FAAD14;
+    }
+
+    &.danger {
+        background: #fdf8f8;
+        border-color: #efa496;
+        color: #FF715DFF;
+    }
+}
+
+.st-error-text {
+    color: var(--q-negative);
+    font-size: 11px;
+    padding: 8px 12px 0;
+}
+
+
+@mixin properties {
+    @for $i from 1 through 100 {
+        /* === font-size::start === */
+        .st-fs-#{$i} {
+            font-size: #{$i}px;
+        }
+        /* === font-size::end === */
+
+        /* Width::start */
+        $width: $i/100 * 100%;
+        .w-#{$i} {
+            width: $width;
+
+            &_ {
+                width: $width !important;
+            }
+        }
+        /* Width::end */
+
+        /* === height::start ===*/
+        .st-h-px-#{$i} {
+            height: #{$i}px;
+        }
+
+        .st-min-h-px-#{$i} {
+            min-height: #{$i}px;
+        }
+
+        .st-max-h-px-#{$i} {
+            max-height: #{$i}px;
+        }
+
+        .st-h-#{$i} {
+            height: #{$i}vh;
+        }
+        .st-max-vh-#{$i} {
+            max-height: #{$i}vh;
+        }
+        .st-min-vh-#{$i} {
+            min-height: #{$i}vh;
+        }
+        /* === height::end ===*/
+    }
+
+
+    @for $i from 0 through 1000 {
+        /* === margin::start === */
+        .st-mg-#{$i} {
+            margin: #{$i}px !important;;
+        }
+
+        .st-mt-#{$i} {
+            margin-top: #{$i}px !important;;
+        }
+
+        .st-mb-#{$i} {
+            margin-bottom: #{$i}px !important;
+        }
+
+        .st-ml-#{$i} {
+            margin-left: #{$i}px !important;;
+        }
+
+        .st-mr-#{$i} {
+            margin-right: #{$i}px !important;;
+        }
+        /* === margin::end === */
+
+        /* === padding::start === */
+        .st-pd-#{$i} {
+            padding: #{$i}px !important;
+        }
+
+        .st-pt-#{$i} {
+            padding-top: #{$i}px !important;
+        }
+
+        .st-pb-#{$i} {
+            padding-bottom: #{$i}px !important;
+        }
+
+        .st-pl-#{$i} {
+            padding-left: #{$i}px !important;
+        }
+
+        .st-pr-#{$i} {
+            padding-right: #{$i}px !important;
+        }
+        /* === margin::end === */
+
+        .st-max-w-#{$i} {
+            max-width: #{$i}px !important;
+        }
+        .st-min-w-#{$i} {
+            min-width: #{$i}px !important;
+        }
+    }
+}
+
+.text-note {
+    font-size: 12px;
+    //color: $colorRed;
+    .icon-note {
+        color: $colorRed;
+    }
+}
+
+.coming-soon {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

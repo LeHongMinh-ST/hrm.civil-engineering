@@ -78,10 +78,10 @@ class UserController extends Controller
 
             return redirect()->route('users.index');
 
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             Log::error('Error store user', [
                 'method' => __METHOD__,
-                'message' => $e->getMessage()
+                'message' => $exception->getMessage()
             ]);
 
             return redirect()->back()
@@ -125,10 +125,11 @@ class UserController extends Controller
             $request->session()->flash('success', 'Cập nhật tài khoản thành công');
 
             return redirect()->route('users.index', request()->query());
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
+
             Log::error('Error update user', [
                 'method' => __METHOD__,
-                'message' => $e->getMessage()
+                'message' => $exception->getMessage()
             ]);
 
             return redirect()->back()
@@ -163,10 +164,10 @@ class UserController extends Controller
 
             return redirect()->route('users.index', $request->query());
 
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             Log::error('Error delete user', [
                 'method' => __METHOD__,
-                'message' => $e->getMessage()
+                'message' => $exception->getMessage()
             ]);
 
             return redirect()->back()

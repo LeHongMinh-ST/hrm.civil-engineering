@@ -36,6 +36,7 @@ Route::middleware('preventBackHistory')->group(function () {
 
         Route::prefix('attendances')->group(function () {
             Route::get('/board', [AttendanceController::class, 'index'])->name('attendances.index');
+            Route::get('/workers/{month}', [AttendanceController::class, 'getAttendancesMonth'])->name('attendances.getAttendancesMonth');
         });
     });
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Worker\WorkerStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @class Worker
@@ -48,7 +49,7 @@ class Worker extends Model
 
     public function setCoefficientsSalaryAttribute($coefficientsSalary)
     {
-        $this->attributes['coefficients_salary'] = (int) (str_ireplace(',', '', $coefficientsSalary));
+        $this->attributes['coefficients_salary'] = (int)(str_ireplace(',', '', $coefficientsSalary));
     }
 
     /**
@@ -62,5 +63,15 @@ class Worker extends Model
             WorkerStatus::InWorking => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-success">' . WorkerStatus::getDescription($this->status) . '</span>',
             default => '<span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-warning">' . WorkerStatus::getDescription($this->status) . '</span>',
         };
+    }
+
+    /**
+     * Relationship attendances table
+     *
+     * @return HasMany
+     */
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
     }
 }

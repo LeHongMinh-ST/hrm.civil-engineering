@@ -85,10 +85,10 @@ class WorkerController extends Controller
 
             return redirect()->route('workers.index');
 
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             Log::error('Error store worker', [
                 'method' => __METHOD__,
-                'message' => $e->getMessage()
+                'message' => $exception->getMessage()
             ]);
 
             return redirect()->back()
@@ -133,10 +133,11 @@ class WorkerController extends Controller
             $request->session()->flash('success', 'Cập nhật thợ thành công');
 
             return redirect()->route('workers.index', $request->query());
-        } catch (Exception $e) {
+
+        } catch (Exception $exception) {
             Log::error('Error update worker', [
                 'method' => __METHOD__,
-                'message' => $e->getMessage()
+                'message' => $exception->getMessage()
             ]);
 
             return redirect()->back()
@@ -163,10 +164,10 @@ class WorkerController extends Controller
 
             return redirect()->route('workers.index', $request->query());
 
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             Log::error('Error delete worker', [
                 'method' => __METHOD__,
-                'message' => $e->getMessage()
+                'message' => $exception->getMessage()
             ]);
 
             return redirect()->back()
