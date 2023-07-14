@@ -7,6 +7,8 @@ import CellBoardAttendance from "../components/CellBoardAttendance.vue";
 import api from "../../api"
 import _ from "lodash";
 
+const prop = defineProps(['imageDefault'])
+console.log(prop)
 const { formatDate } = useHelper()
 
 const workers = ref([])
@@ -51,7 +53,7 @@ const handleGetAttendanceWorker = async () => {
                     </div>
                 </div>
                 <div class="board-wrapper__content">
-                    <table class="table table-bordered board-table table-responsive-md">
+                    <table v-if="!workers.length > 0" class="table table-bordered board-table table-responsive-md">
                         <thead>
                         <tr>
                             <th class="worker-name">
@@ -65,7 +67,7 @@ const handleGetAttendanceWorker = async () => {
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                         <tr v-for="(worker, index) in workers" :key="worker.id">
                             <td class="worker-name">{{ index + 1 }}. {{ worker.name }}</td>
                             <td class="worker-attendance" v-for="attendance in worker.attendances" :key="attendance.id">
@@ -77,6 +79,14 @@ const handleGetAttendanceWorker = async () => {
                         </tr>
                         </tbody>
                     </table>
+
+                    <div v-else class="empty-table text-center">
+                        <div class="image-empty">
+                            <img :src="imageDefault"
+                                 width="300"    alt="">
+                        </div>
+                        <div class="text-empty">Không có bản ghi!</div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col">
                 <div id="app">
-                    <attendance-board></attendance-board>
+                    <attendance-board :image-default="'{{ asset(config('constants.empty_image')) }}'"></attendance-board>
                 </div>
             </div>
         </div>
